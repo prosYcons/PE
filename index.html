@@ -37,15 +37,20 @@
             const canvas = document.getElementById("screensaver");
             const ctx = canvas.getContext("2d");
 
-            //step 1. store the ball's data in an object
-            const ball = {
-                x: 100,
-                y: 100,
-                radius: 20,
-                dx: 3,
-                dy: 2,
-                color: "red"
-            };
+            //reusable function to create a ball object
+            function createBall(x, y, radius, dx, dy, color) {
+                return {
+                    x: x,
+                    y: y,
+                    radius: radius,
+                    dx: dx,
+                    dy: dy,
+                    color: color
+                };
+            }
+
+            //initialise one ball object
+            const ball = createBall(100, 100, 20, 3, 2, "red");
 
             //step 2. draw the ball on the canvas
             function drawBall(ball) {
@@ -80,7 +85,7 @@
 
                 updateBall(ball);
                 drawBall(ball);
-                
+
                 requestAnimationFrame(animate);
             }
 
