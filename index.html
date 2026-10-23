@@ -53,7 +53,29 @@
             const balls = [
                 createBall(100, 100, 20, 3, 2, "red"),
                 createBall(250, 150, 30, -2, 3, "blue"),
-                createBall(400, 300, 15, 4, -2, "yellow")
+                createBall(400, 300, 15, 4, -2, "yellow"),
+                createBall(500, 400, 25, -3, -3, "green"),
+                createBall(600, 200, 10, 2, 4, "purple"),
+                createBall(700, 300, 20, -4, 3, "orange"),
+                createBall(750, 450, 15, 3, -4, "cyan"),
+                createBall(800, 100, 20, -2, 3, "magenta"),
+                createBall(850, 200, 10, 3, -3, "lime"),
+                createBall(900, 300, 20, -3, 4, "pink"),
+                createBall(950, 400, 15, 3, -4, "brown"),
+                createBall(1000, 500, 20, -1, 3, "silver"),
+                createBall(1050, 100, 15, 0, -3, "gold"),
+                createBall(1100, 200, 20, -3, 4, "teal"),
+                createBall(1150, 300, 15, 3, -4, "navy"),
+                createBall(1200, 400, 20, -3, 3, "maroon"),
+                createBall(1250, 100, 15, 3, -3, "indigo"),
+                createBall(1300, 200, 20, -3, 4, "turquoise"),
+                createBall(1350, 300, 15, 3, -4, "coral"),
+                createBall(1400, 400, 20, 4, 3, "khaki"),
+                createBall(1450, 100, 15, 3, -4, "olive"),
+                createBall(1500, 200, 20, -3, 4, "fuchsia"),
+                createBall(1550, 300, 15, 3, -4, "crimson"),
+                createBall(1600, 400, 20, -2, 3, "darkgreen"),
+                createBall(1650, 100, 15, 3, -3, "darkred"),
             ];
 
             //function for drawing the ball on the canvas
@@ -66,8 +88,15 @@
                     0,
                     Math.PI * 2
                 );
+
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = ball.color;
+
                 ctx.fillStyle = ball.color;
                 ctx.fill();
+
+                ctx.shadowBlur = 0; //reset shadow for other drawings
+                ctx.shadowColor = "transparent"; //reset shadow color for other drawings
             }
 
             //function to update position and detect wall collisions
