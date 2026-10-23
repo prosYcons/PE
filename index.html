@@ -49,10 +49,14 @@
                 };
             }
 
-            //initialise one ball object
-            const ball = createBall(100, 100, 20, 3, 2, "red");
+            //initialise multiple ball object
+            const balls = [
+                createBall(100, 100, 20, 3, 2, "red"),
+                createBall(250, 150, 30, -2, 3, "blue"),
+                createBall(400, 300, 15, 4, -2, "yellow")
+            ];
 
-            //step 2. draw the ball on the canvas
+            //function for drawing the ball on the canvas
             function drawBall(ball) {
                 ctx.beginPath();
                 ctx.arc(
@@ -66,25 +70,48 @@
                 ctx.fill();
             }
 
-            //step 3. update position and detect wall collisions
+            //function to update position and detect wall collisions
             function updateBall(ball) {
                 ball.x += ball.dx;
                 ball.y += ball.dy;
 
-                if (ball.x + ball.radius >= canvas.width || ball.x - ball.radius <= 0) {
-                    ball.dx *= -1;
+                //this checks for collision with the left and right walls
+                if (ball.x + ball.radius >= canvas.width ) {
+                    ball.x = canvas.width - ball.radius;
+                    ball.dx = -Math.abs(ball.dx);
+                } else if (ball.x - ball.radius <= 0) {
+                    ball.x = ball.radius;
+                    ball.dx = Math.abs(ball.dx);
                 }
-                if (ball.y + ball.radius >= canvas.height || ball.y - ball.radius <= 0) {
-                    ball.dy *= -1;
+
+                //this checks for collision with the top and bottom walls
+                if (ball.y + ball.radius >= canvas.height) {
+                    ball.y = canvas.height - ball.radius;
+                    ball.dy = -Math.abs(ball.dy);
+                } else if (ball.y - ball.radius <= 0) {
+                    ball.y = ball.radius;
+                    ball.dy = Math.abs(ball.dy);
                 }
             }
 
-            //step 4. run animation
-            function animate() {
+            //functions to run animation
+            function update() {
+                for (let ball of balls) {
+                    updateBall(ball);
+                }
+            }
+
+            function draw() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                updateBall(ball);
-                drawBall(ball);
+                for (let ball of balls) {
+                    drawBall(ball);
+                }
+            }
+
+            function animate() {
+                update();
+                draw();
 
                 requestAnimationFrame(animate);
             }
